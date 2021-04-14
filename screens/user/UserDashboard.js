@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Block } from "galio-framework";
+import { Block, Text } from "galio-framework";
 import { Avatar, Card, Title } from "react-native-paper";
 
 export default class UserDashboard extends Component {
@@ -11,11 +11,11 @@ export default class UserDashboard extends Component {
       dashboardItem: [
         {
           name: "Talk to astrologer",
-          routeName: "Astro Call",
+          routeName: "FormWizard",
           imagePath: require("../../assets/icons/chat.png")
         },
         {
-          name: "Horoscope",
+          name: "Show horoscope",
           routeName: "Horoscope",
           imagePath: require("../../assets/icons/bionic-eye.png")
         },
@@ -36,21 +36,26 @@ export default class UserDashboard extends Component {
     return (
       <SafeAreaProvider>
         <Block style={styles.container}>
+          <Text center h3 muted>Please choose one</Text>
           <Block style={styles.cardContainer}>
             {this.state.dashboardItem.map((data, index) => (
               <TouchableOpacity
                 key={index}
-                style={styles.button}
                 onPress={() => this.props.navigation.navigate(data.routeName)}
               >
-                <Card style={styles.card}>
-                  <Card.Content>
-                    <View style={styles.cardImage}>
-                      <Avatar.Image size={60} source={data.imagePath} />
-                      <Title>{data.name}</Title>
-                    </View>
-                  </Card.Content>
-                </Card>
+                <View>
+                  <Card style={styles.card}>
+                    <Card.Content>
+                      <View style={styles.cardImage}>
+                        <Avatar.Image size={60} source={data.imagePath} />
+                        <Text style={styles.text} h6 center>
+                          {data.name}
+                        </Text>
+                        <Text muted>just for ₹ 300</Text>
+                      </View>
+                    </Card.Content>
+                  </Card>
+                </View>
               </TouchableOpacity>
             ))}
           </Block>
@@ -63,23 +68,28 @@ export default class UserDashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
-    alignItems: "center",
     flex: 1
   },
   cardContainer: {
-    padding: 50,
-    width: "100%"
+    padding: 40,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around"
   },
   card: {
     backgroundColor: "#fcba03",
-    justifyContent: "center",
-    marginBottom: 10,
-    alignItems: "center",
-    elevation: 10,
-    borderRadius: 70
+    marginBottom: 12,
+    borderRadius: 15,
+    width: 160,
+    height: 160,
+    elevation: 10
   },
   cardImage: {
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: "center"
+  },
+  text: {
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    marginTop: 10
   }
 });

@@ -7,12 +7,11 @@ import { Avatar, Card, Title } from "react-native-paper";
 
 // screens
 import UserDashboard from "../screens/user/UserDashboard";
-import AstroDashboard from "../screens/user/AstroDashboard";
 import AstroCall from "../screens/user/AstroCall";
 import Horoscope from "../screens/user/Horoscope";
 import Report from "../screens/user/Report";
 import Community from "../screens/user/Community";
-
+import FormWizard from "../screens/user/FormWizard"
 
 import {
   createDrawerNavigator,
@@ -41,17 +40,17 @@ function CustomDrawerContent(props) {
         <View>
           <DrawerItemList {...props} />
         </View>
-        <View style={styles.Footer}>
-          <Avatar.Image size={50} source={require("../assets/icons/fb.png")} />
-          <Avatar.Image
-            size={50}
-            source={require("../assets/icons/instagram.png")}
-          />
-          <Avatar.Image
-            size={50}
-            source={require("../assets/icons/youtube.png")}
-          />
-        </View>
+      </View>
+      <View style={styles.Footer}>
+        <Avatar.Image size={50} source={require("../assets/icons/fb.png")} />
+        <Avatar.Image
+          size={50}
+          source={require("../assets/icons/instagram.png")}
+        />
+        <Avatar.Image
+          size={50}
+          source={require("../assets/icons/youtube.png")}
+        />
       </View>
     </DrawerContentScrollView>
   );
@@ -69,11 +68,12 @@ function MyDrawer() {
       drawerContent={props => <CustomDrawerContent {...props} />}
     >
       <Drawer.Screen name="User Dashboard" component={UserDashboard} />
-      <Drawer.Screen name="Astro Dashboard" component={AstroDashboard} />
       <Drawer.Screen name="Astro Call" component={AstroCall} />
       <Drawer.Screen name="Horoscope" component={Horoscope} />
       <Drawer.Screen name="Report" component={Report} />
       <Drawer.Screen name="Community" component={Community} />
+      <Drawer.Screen name="FormWizard" component={FormWizard} />
+
     </Drawer.Navigator>
   );
 }
@@ -82,7 +82,7 @@ export default function App(props) {
   return (
     <SafeAreaProvider>
       <Header
-        backgroundColor="#fcba03"
+        backgroundColor="pink"
         leftComponent={{
           icon: "menu",
           color: "#000",
@@ -102,7 +102,7 @@ export default function App(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 9
   },
   cardContainer: {
     padding: 50,
@@ -124,6 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     padding: 10,
-    marginTop: "100%"
+    marginTop: "80%"
   }
 });
