@@ -11,7 +11,7 @@ import AstroCall from "../screens/user/AstroCall";
 import Horoscope from "../screens/user/Horoscope";
 import Report from "../screens/user/Report";
 import Community from "../screens/user/Community";
-import FormWizard from "../screens/user/FormWizard"
+import FormWizard from "../screens/user/formWizrad/FormWizard";
 
 import {
   createDrawerNavigator,
@@ -21,8 +21,24 @@ import {
 } from "@react-navigation/drawer";
 
 function CustomDrawerContent(props) {
+  // console.log("props.state",props.state);
+  const filteredProps = {
+    ...props,
+    state: {
+      ...props.state,
+      routeNames: props.state.routeNames.filter(routeName => {
+        routeName !== "Astro Call";
+      }),
+      routes: props.state.routes.filter(route => {
+        route.name !== "Astro Call";
+      })
+    }
+  };
+
+  console.log("filteredProps", filteredProps);
+
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...filteredProps}>
       <View style={styles.container}>
         <View>
           <Card style={styles.card}>
@@ -38,7 +54,7 @@ function CustomDrawerContent(props) {
           </Card>
         </View>
         <View>
-          <DrawerItemList {...props} />
+          <DrawerItemList {...filteredProps} />
         </View>
       </View>
       <View style={styles.Footer}>
@@ -73,7 +89,6 @@ function MyDrawer() {
       <Drawer.Screen name="Report" component={Report} />
       <Drawer.Screen name="Community" component={Community} />
       <Drawer.Screen name="FormWizard" component={FormWizard} />
-
     </Drawer.Navigator>
   );
 }
